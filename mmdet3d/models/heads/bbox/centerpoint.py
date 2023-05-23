@@ -655,7 +655,7 @@ class CenterHead(BaseModule):
             num_pos = heatmaps[task_id].eq(1).float().sum().item()
 
             # multiply with dq weights
-            loss_heatmap = dequity_weights_cls * self.loss_cls(
+            loss_heatmap = dequity_weights * self.loss_cls(
                 preds_dict[0]["heatmap"], heatmaps[task_id], avg_factor=max(num_pos, 1)
             )
             # loss_heatmap = self.loss_cls(
@@ -689,7 +689,7 @@ class CenterHead(BaseModule):
             bbox_weights = mask * mask.new_tensor(code_weights)
 
 
-            loss_bbox = dequity_weights_bbox * self.loss_bbox(
+            loss_bbox = dequity_weights * self.loss_bbox(
                 pred, target_box, bbox_weights, avg_factor=(num + 1e-4)
             )
 

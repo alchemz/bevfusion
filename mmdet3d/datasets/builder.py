@@ -36,6 +36,8 @@ def build_dataset(cfg, default_args=None):
         )
     elif cfg["type"] == "CBGSDataset":
         dataset = CBGSDataset(build_dataset(cfg["dataset"], default_args))
+    elif cfg["type"] == "NoCBGSDataset":
+        dataset = build_dataset(cfg["dataset"], default_args)
     elif isinstance(cfg.get("ann_file"), (list, tuple)):
         dataset = _concat_dataset(cfg, default_args)
     else:
